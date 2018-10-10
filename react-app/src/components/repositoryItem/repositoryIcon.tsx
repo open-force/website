@@ -2,7 +2,7 @@ import { Icon, Tooltip } from 'antd';
 import * as React from 'react';
 
 const ICON_CONTAINER_STYLE = { marginRight: 12 };
-const ICON_STYLE = { fontSize: 16, marginRight: 2 };
+const ICON_STYLE = { fontSize: 16, marginRight: 4 };
 
 interface RepositoryIconProps {
   hide?: boolean;

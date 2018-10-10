@@ -1,5 +1,5 @@
 import { RepositoryIcon } from '@src/components/repositoryItem/repositoryIcon';
-import { Avatar, Badge, Card, Icon, Popover, Tooltip } from 'antd';
+import { Avatar, Badge, Card, Divider, Icon, Popover, Tooltip } from 'antd';
 import * as React from 'react';
 
 export interface RepositoryItemProps {
@@ -17,13 +17,14 @@ export class RepositoryItem extends React.Component<RepositoryItemProps, any> {
         extra={this.renderFork()}
       >
         {repo.description}
-        <div style={{ marginTop: 10 }}>
+        <Divider style={{marginBottom: 0}} />
+        <div style={{ marginTop: 10, float: 'right' }}>
           <RepositoryIcon hint='language' iconType='code' text={repo.language} />
           <RepositoryIcon hint='stars' iconType='star' text={repo.stargazers_count} />
           <RepositoryIcon hint='watchers' iconType='notification' text={repo.watchers_count} />
           <RepositoryIcon hint='forks' iconType='fork' text={repo.forks_count} />
           {repo.license
-            && <RepositoryIcon hint='license' iconType='fork' text={repo.license.name} />
+            && <RepositoryIcon hint='license' iconType='book' text={repo.license.name} />
           }
           <RepositoryIcon
             hide={repo.open_issues_count === 0}
@@ -32,6 +33,13 @@ export class RepositoryItem extends React.Component<RepositoryItemProps, any> {
             link={`${repo.html_url}/issues`}
             text={repo.open_issues_count}
           />
+
+          <RepositoryIcon
+            hide={repo.topics.length === 0}
+            hint={repo.topics.join(', ')}
+            iconType='tags'
+          />
+
         </div>
       </Card>
     );
