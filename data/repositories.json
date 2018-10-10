@@ -1,0 +1,17 @@
+[
+  {
+    "user": "open-force",
+    "repositories": [
+      "jsonparse",
+      "Httpex",
+      "grid"
+    ]
+  },
+  {
+    "user": "chuckjonas",
+    "repositories": [
+      "APEX-JSONReservedNameSerializer",
+      "sfdx-org-launcher"
+    ]
+  }
+]

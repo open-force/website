@@ -1,0 +1,47 @@
+{
+  "name": "typescript-react-node-app",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": "8.9.x"
+  },
+  "scripts": {
+    "start": "node ./build/index.js",
+    "dev-client": "cd react-app && npm start",
+    "dev-server": "nodemon --exec ./node_modules/.bin/ts-node -- ./server/index.ts",
+    "test": "cd react-app && npm test",
+    "heroku-postbuild": "tsc & cd react-app/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+  },
+  "cacheDirectories": [
+    "node_modules",
+    "react-app/node_modules"
+  ],
+  "dependencies": {
+    "@types/node": "^10.1.2",
+    "axios": "^0.18.0",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.3",
+    "memory-cache": "^0.2.0",
+    "tslib": "^1.9.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mars/heroku-cra-node.git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "create-react-app",
+    "react"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "@types/dotenv": "^4.0.3",
+    "@types/express": "^4.16.0",
+    "@types/memory-cache": "^0.2.0",
+    "nodemon": "^1.17.4",
+    "ts-node": "^6.0.3",
+    "typescript": "^2.8.1"
+  }
+}

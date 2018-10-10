@@ -1,0 +1,14 @@
+{
+    "presets": ["es2015"],
+    "plugins": [
+        ["react-hot-loader/babel"],
+        [
+            "import",
+            {
+                "libraryName": "antd",
+                "style": true,
+                "libraryDirectory": "es"
+            }
+        ]
+    ]
+}
