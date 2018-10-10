@@ -36,11 +36,7 @@ module.exports = (env = {}) => {
     console.log({ env });
     const isBuild = !!env.build;
     const isDev = !env.build;
-    const isLocal = env.local;
     const isSourceMap = !!env.sourceMap || isDev;
-
-    let orgInfo;
-    let instanceUrl;
 
     let GLOBAL_DEFINES =
         {
