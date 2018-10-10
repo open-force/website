@@ -8,6 +8,9 @@ Proof of concept
 
 ## Setup
 
+
+### install
+
 Project has 2 package.json files, so you will need to run `npm install` twice.
 
 1. `git clone`
@@ -16,12 +19,26 @@ Project has 2 package.json files, so you will need to run `npm install` twice.
 4. `cd react-app`
 5. `npm install`
 
+### .env
+
+Project is configured with [dotenv](https://www.npmjs.com/package/dotenv) to load enviormental vars
+
+1. Create a `.env` file in root of project
+2. add values for the following:
+
+```
+GITHUB_USER=
+GITHUB_PASS=
+```
+
 ## Deploy to heroku
 
 1. `heroku create`
 1. `git push heroku master`
+1. use the `heroku` cli or user interface to setup "config vars" for same `.env` properties above
 
-Note: Uses the `heroku-postbuild` script to build the react app upon deployment.
+Note: Uses the `heroku-postbuild` script to build the react app upon deployment.  This results in a slightly slower deploy time.
+
 
 ## Development
 
