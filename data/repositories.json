@@ -15,5 +15,25 @@
       "bad-ass-salesforce-stack",
       "ts-force"
     ]
+  },
+  {
+    "user": "salesforce",
+    "repositories": [
+      "design-system-react"
+    ]
+  },
+  {
+    "user": "financialforcedev",
+    "repositories": [
+      "fflib-apex-common",
+      "apex-mdapi",
+      "fflib-apex-mocks"
+    ]
+  },
+  {
+    "user": "blueprinthealth",
+    "repositories": [
+      "sirono-common"
+    ]
   }
 ]

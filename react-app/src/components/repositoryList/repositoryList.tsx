@@ -66,15 +66,15 @@ export class RepositoryList extends React.Component<RepositoryListProps, Reposit
               mode='multiple'
               style={{ width: '80%' }}
               placeholder='Filter on topics'
-              onChange={(filteredTopics: string[]) => this.setState({filteredTopics})}
+              onChange={(filteredTopics: string[]) => this.setState({ filteredTopics })}
             >
               {topicOpts}
             </Select>
           </Col>
-          <Col span={6}>
+          <Col span={4}>
             Sort By: <Select
               value={this.state.sortField}
-              style={{ width: 200 }}
+              style={{ width: 130 }}
               placeholder='Sort By'
               onChange={(e: SortFields) => { this.setState({ sortField: e }); }}
             >

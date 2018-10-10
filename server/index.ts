@@ -6,12 +6,6 @@ import * as cache from 'memory-cache'
 
 require('dotenv').config();
 
-const app = express();
-const PORT = process.env.PORT || 5000;
-
-// Priority serve any static files.
-app.use(express.static(path.resolve(__dirname, '../react-app/dist')));
-
 const github = new Github({
   username: process.env.GITHUB_USER,
   password: process.env.GITHUB_PASS
@@ -20,6 +14,12 @@ const github = new Github({
 const repoData: RepositoryDataEntry[] = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, '../data/repositories.json')).toString()
 );
+
+const app = express();
+const PORT = process.env.PORT || 5000;
+
+// Priority serve any static files.
+app.use(express.static(path.resolve(__dirname, '../react-app/dist')));
 
 app.get('/api/repos', async function (request, response) {
   response.send(await getRepoData());
