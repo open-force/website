@@ -11,7 +11,9 @@
     "user": "chuckjonas",
     "repositories": [
       "APEX-JSONReservedNameSerializer",
-      "sfdx-org-launcher"
+      "sfdx-org-launcher",
+      "bad-ass-salesforce-stack",
+      "ts-force"
     ]
   }
 ]
