@@ -54,7 +54,7 @@
     "tslint": "^5.1.0",
     "tslint-react": "^3.0.0",
     "typescript": "^2.8.1",
-    "webpack": "^4.20.2",
+    "webpack": "^4.19.1",
     "webpack-cli": "^2.0.13",
     "webpack-dashboard": "^1.0.0",
     "webpack-dev-server": "^3.1.9"
