@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- iojs
+- '8'
+script:
+- echo "skipping tests"
+deploy:
+  provider: heroku
+  api_key:
+    secure: o6ZThhjoyD0w0lvY8yY/F3RPDtg2GI58cB1GQkIsVG7bU4aiRD4Zj+OmHq+9OoNGS33tToD2a1ekviFe7QxvAZNoIEe27xhhJiuKSAXWgzoMn7nDKiEmO5Q2AodThyPBbEDBuRelqR4coAMO1oXMD9vS5qBedWOoUG7PFu/l/5NrkjF4EZ5n4aqT2aA7SxKJa/dkqLzzX+VANgpIWBM5mMjXnROKlli7OTcjHGOYIrmNlmCFJPdkigkbfldtUkT8Nq6UrBo4sgsOkObH7fAz+mFIAzbPwYeX5q1FJigkwFU3HnbS3zfV1MDVHjavf5CxtzXgGEOd0xa8OZztiEDNQJe81lLvcNaIFqBQzJE8LPppG2z5JESKtLopB4IzNtsOMH/iBvniXOtCqyF6UYP+5gal/cFT09y/89yOP5sNkEfySOQ1DN3QCMr69/hh7Ezg8Nk8F+lBEZP1FneReUQVjQpKlvmorti+5X6KMLj2vfmu0eyYJ1/d2CnNhm7182rLS7epT0QQs6yCrLbHnDVlMNVDUSm+tDG1De72QdtQ5Uz6yA1ZfP2w/QzP917yzIlARy9UyyLQeK5iMw+TnYjY5oV4NV0lf3EB38UFUoGKM3aiqgIgWp74s+XzTVijckTfpkTngaC9xJZXlrWQJA47esJ4XPpluuOndjSY7pmDXrk=
+  app: open-force
+  on:
+    repo: ChuckJonas/open-force-prototype

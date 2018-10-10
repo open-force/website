@@ -1,5 +1,5 @@
 {
-  "name": "typescript-react-node-app",
+  "name": "open-force",
   "version": "1.0.0",
   "description": "",
   "engines": {
@@ -36,7 +36,6 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@types/axios": "^0.14.0",
     "@types/dotenv": "^4.0.3",
     "@types/express": "^4.16.0",
     "@types/memory-cache": "^0.2.0",
