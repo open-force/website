@@ -2,6 +2,10 @@
 
 Proof of concept
 
+## Adding new Repositories
+- Submit a PR updating [/data/repositories.json](https://github.com/open-force/website/blob/master/data/repositories.json) with the repo's you'd like to add 
+- site will be updated when PR is merged into master
+
 ## Setup
 
 Project has 2 package.json files, so you will need to run `npm install` twice.
