@@ -1,7 +1,7 @@
 import { RepositoryItem } from '@src/components/repositoryItem/repositoryItem';
 import { Col, Input, List, Row, Select } from 'antd';
 import * as React from 'react';
-
+import { Repository } from '../../../../shared/resource';
 export interface RepositoryListProps {
   repositories: Repository[];
 }
@@ -24,8 +24,8 @@ export type Sorters = {
 
 const SORTERS: Sorters = {
   name: (a, b) => a.name.localeCompare(b.name),
-  stars: (a, b) => b.stargazers_count - a.stargazers_count,
-  watchers: (a, b) => b.watchers_count - a.watchers_count,
+  stars: (a, b) => b.favoriteCount - a.favoriteCount,
+  watchers: (a, b) => b.watcherCount - a.watcherCount,
 };
 
 export class RepositoryList extends React.Component<RepositoryListProps, RepositoryListState> {

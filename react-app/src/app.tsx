@@ -2,6 +2,7 @@ import { RepositoryList } from '@src/components';
 import { Card, Spin } from 'antd';
 import * as React from 'react';
 import { hot } from 'react-hot-loader';
+import { Repository } from '../../shared/resource';
 
 export interface AppState {
   repositories: Repository[];
@@ -16,7 +17,7 @@ class App extends React.Component<{}, AppState> {
     };
   }
 
-  public async componentDidMount(){
+  public async componentDidMount() {
     const response = await fetch('/api/repos');
     const repositories = await response.json();
     this.setState({ repositories });

@@ -13,7 +13,7 @@ interface RepositoryIconProps {
 }
 
 export const RepositoryIcon: React.SFC<RepositoryIconProps> = (props) => {
-  if (props.hide){
+  if (props.hide) {
     return null;
   }
   let content = (
