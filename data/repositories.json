@@ -44,14 +44,31 @@
   },
   {
     "user": "mikesimps",
+    "source": "github",
     "repositories": [
       "sfdx-collate"
     ]
   },
-    {
+  {
     "user": "pozil",
     "repositories": [
       "lightning-singleton"
     ]
+  },
+  {
+    "user": "mikesimps",
+    "source": "bitbucket",
+    "repositories": [
+      "mike-public-test"
+    ]
+  },
+  {
+    "user": "mikesimps",
+    "source": "gitlab",
+    "url" : "https://gitlab.com",
+    "repositories": [
+      "8833630"
+    ]
   }
+
 ]
