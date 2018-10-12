@@ -1,6 +1,6 @@
 [
   {
-    "user": "open-force",
+    "user": 3,
     "repositories": [
       "jsonparse",
       "Httpex",
@@ -8,7 +8,6 @@
     ]
   },
   {
-    "user": "chuckjonas",
     "repositories": [
       "APEX-JSONReservedNameSerializer",
       "sfdx-org-launcher",
