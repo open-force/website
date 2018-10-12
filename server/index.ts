@@ -1,8 +1,11 @@
 import * as express from 'express';
 import * as path from 'path';
-import { Github } from './lib/githubClient';
 import * as fs from 'fs';
-import * as cache from 'memory-cache'
+import * as cache from 'memory-cache';
+import { Github } from './lib/githubClient';
+import { Bitbucket } from './lib/bitbucketClient';
+import { Gitlab } from './lib/gitlabClient';
+import { Repository } from '../shared/resource';
 
 require('dotenv').config();
 
@@ -10,6 +13,13 @@ const github = new Github({
   username: process.env.GITHUB_USER,
   password: process.env.GITHUB_PASS
 });
+
+const bitbucket = new Bitbucket({
+  username: process.env.BITBUCKET_USER,
+  password: process.env.BITBUCKET_PASS
+});
+
+const gitlab = new Gitlab();
 
 const repoData: RepositoryDataEntry[] = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, '../data/repositories.json')).toString()
@@ -49,13 +59,27 @@ async function getRepoData(){
   for (let item of repoData) {
     for (let repo of item.repositories) {
       try{
-        let response = await github.getRepo(item.user, repo);
-        data.push(response.data);
+        let repository: Repository;
+        switch (item.source) {
+          case 'bitbucket': {
+            repository = await bitbucket.getRepo(item.user, repo);
+            break;
+          }
+          case 'gitlab': {
+            repository = await gitlab.getRepo(Number(repo), item.url);
+            break;
+          }
+          default: {
+            repository = await github.getRepo(item.user, repo);
+          }
+        }
+        data.push(repository);
       }catch(e){
         console.log(e);
       }
     }
   }
+
   cache.put(CACHE_KEY, data, CACHE_TIMEOUT);
   return data;
 }
