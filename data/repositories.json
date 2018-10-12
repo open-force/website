@@ -1,6 +1,6 @@
 [
   {
-    "user": 3,
+    "user": "open-force",
     "repositories": [
       "jsonparse",
       "Httpex",
@@ -8,6 +8,7 @@
     ]
   },
   {
+    "user": "chuckjonas",
     "repositories": [
       "APEX-JSONReservedNameSerializer",
       "sfdx-org-launcher",
@@ -33,24 +34,6 @@
     "user": "blueprinthealth",
     "repositories": [
       "sirono-common"
-    ]
-  },
-  {
-    "user": "madmax983",
-    "repositories": [
-      "lightning-redux"
-    ]
-  },
-  {
-    "user": "mikesimps",
-    "repositories": [
-      "sfdx-collate"
-    ]
-  },
-    {
-    "user": "pozil",
-    "repositories": [
-      "lightning-singleton"
     ]
   }
 ]
