@@ -35,5 +35,23 @@
     "repositories": [
       "sirono-common"
     ]
+  },
+  {
+    "user": "madmax983",
+    "repositories": [
+      "lightning-redux"
+    ]
+  },
+  {
+    "user": "mikesimps",
+    "repositories": [
+      "sfdx-collate"
+    ]
+  },
+    {
+    "user": "pozil",
+    "repositories": [
+      "lightning-singleton"
+    ]
   }
 ]
