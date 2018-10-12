@@ -53,5 +53,12 @@
     "repositories": [
       "lightning-singleton"
     ]
+  },
+  {
+    "user": "mikesimps",
+    "repositories": [
+      "sfdx-collate",
+      "primary-contact-lc-sfdx"
+    ]
   }
 ]
