@@ -11,7 +11,7 @@ const github = new Github({
   password: process.env.GITHUB_PASS
 });
 
-const repoData: RepositoryDataEntry[] = JSON.parse(
+const repoData: AppData = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, '../data/repositories.json')).toString()
 );
 
@@ -37,7 +37,6 @@ app.listen(PORT, function () {
 const CACHE_KEY = 'repos'
 const CACHE_TIMEOUT = 60*5*1000;
 async function getRepoData(){
-
   //check cache
   if(cache.get(CACHE_KEY)){
     return cache.get(CACHE_KEY);

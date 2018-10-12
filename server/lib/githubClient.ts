@@ -9,8 +9,8 @@ type GithubAuth = GithubBasicAuth | string;
 
 export class Github {
   private client: AxiosInstance;
-  constructor(auth?: GithubAuth) {
 
+  constructor(auth?: GithubAuth) {
     let headers = {
       Accept: 'application/vnd.github.mercy-preview+json'
     };

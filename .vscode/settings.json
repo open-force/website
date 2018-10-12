@@ -1,5 +1,8 @@
 {
     "editor.tabSize": 2,
     "tslint.autoFixOnSave": true,
-    "tslint.alwaysShowRuleFailuresAsWarnings": true
+    "tslint.alwaysShowRuleFailuresAsWarnings": true,
+    "files.exclude": {
+      "**/.env": true
+    }
   }
