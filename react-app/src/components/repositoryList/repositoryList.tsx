@@ -1,12 +1,12 @@
-import { RepositoryItem } from '@src/components/repositoryItem/repositoryItem';
+import { ResourceItem } from '@src/components/repositoryItem/repositoryItem';
 import { Col, Input, List, Row, Select } from 'antd';
 import * as React from 'react';
-import { Repository } from '../../../../shared/resource';
-export interface RepositoryListProps {
-  repositories: Repository[];
+
+export interface ResourceListProps {
+  resources: Resource[];
 }
 
-interface RepositoryListState {
+interface ResourceListState {
   searchTerm: string;
   sortField: SortFields;
   filteredTopics: string[];
@@ -19,7 +19,7 @@ enum SortFields {
 }
 
 export type Sorters = {
-  [P in SortFields]: (a: Repository, b: Repository) => number;
+  [P in SortFields]: (a: Resource, b: Resource) => number;
 };
 
 const SORTERS: Sorters = {
@@ -28,8 +28,8 @@ const SORTERS: Sorters = {
   watchers: (a, b) => b.watcherCount - a.watcherCount,
 };
 
-export class RepositoryList extends React.Component<RepositoryListProps, RepositoryListState> {
-  constructor(props: RepositoryListProps) {
+export class ResourceList extends React.Component<ResourceListProps, ResourceListState> {
+  constructor(props: ResourceListProps) {
     super(props);
 
     this.state = {
@@ -40,7 +40,7 @@ export class RepositoryList extends React.Component<RepositoryListProps, Reposit
   }
 
   public render() {
-    const topics = this.props.repositories.reduce((ret, repo) => {
+    const topics = this.props.resources.reduce((ret, repo) => {
       repo.topics.forEach((topic) => ret.add(topic));
       return ret;
     }, new Set<string>());
@@ -94,7 +94,7 @@ export class RepositoryList extends React.Component<RepositoryListProps, Reposit
   }
 
   private getDataSource() {
-    return this.props.repositories.filter((repo) => {
+    return this.props.resources.filter((repo) => {
       const term = this.state.searchTerm.toLowerCase();
       const include =
         (
@@ -111,7 +111,7 @@ export class RepositoryList extends React.Component<RepositoryListProps, Reposit
     }).sort(SORTERS[this.state.sortField]);
   }
 
-  private renderItem(item: Repository) {
-    return <RepositoryItem repo={item} />;
+  private renderItem(item: Resource) {
+    return <ResourceItem repo={item} />;
   }
 }

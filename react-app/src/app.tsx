@@ -1,11 +1,10 @@
-import { RepositoryList } from '@src/components';
+import { ResourceList } from '@src/components';
 import { Card, Spin } from 'antd';
 import * as React from 'react';
 import { hot } from 'react-hot-loader';
-import { Repository } from '../../shared/resource';
 
 export interface AppState {
-  repositories: Repository[];
+  resources: Resource[];
 }
 
 class App extends React.Component<{}, AppState> {
@@ -13,14 +12,14 @@ class App extends React.Component<{}, AppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      repositories: null,
+      resources: null,
     };
   }
 
   public async componentDidMount() {
     const response = await fetch('/api/repos');
-    const repositories = await response.json();
-    this.setState({ repositories });
+    const resources = await response.json();
+    this.setState({ resources });
   }
 
   public render() {
@@ -35,8 +34,8 @@ class App extends React.Component<{}, AppState> {
   }
 
   private renderRepositories = () => {
-    if (this.state.repositories) {
-      return <RepositoryList repositories={this.state.repositories} />;
+    if (this.state.resources) {
+      return <ResourceList resources={this.state.resources} />;
     }
     return <Spin spinning={true} />;
   }

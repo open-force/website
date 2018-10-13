@@ -4,7 +4,7 @@ import * as React from 'react';
 const ICON_CONTAINER_STYLE = { marginRight: 12 };
 const ICON_STYLE = { fontSize: 16, marginRight: 4 };
 
-interface RepositoryIconProps {
+interface ResourceIconProps {
   hide?: boolean;
   iconType: string;
   text?: string | number;
@@ -12,7 +12,7 @@ interface RepositoryIconProps {
   link?: string;
 }
 
-export const RepositoryIcon: React.SFC<RepositoryIconProps> = (props) => {
+export const ResourceIcon: React.SFC<ResourceIconProps> = (props) => {
   if (props.hide) {
     return null;
   }
@@ -21,6 +21,7 @@ export const RepositoryIcon: React.SFC<RepositoryIconProps> = (props) => {
         <Icon style={ICON_STYLE} type={props.iconType} theme='outlined' />{props.text}
     </span>
   );
+
 
   if (props.link) {
     content = (

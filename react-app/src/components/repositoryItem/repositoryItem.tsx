@@ -1,49 +1,72 @@
-import { RepositoryIcon } from '@src/components/repositoryItem/repositoryIcon';
+import { ResourceIcon } from '@src/components/repositoryItem/repositoryIcon';
 import { Avatar, Badge, Card, Divider, Icon, Popover, Tooltip } from 'antd';
 import * as React from 'react';
-import { Repository } from '../../../../shared/resource';
 
-export interface RepositoryItemProps {
-  repo: Repository;
+export interface ResourceItemProps {
+  repo: Resource;
 }
 
-export class RepositoryItem extends React.Component<RepositoryItemProps, any> {
+export class ResourceItem extends React.Component<ResourceItemProps, any> {
   public render() {
     const {repo} = this.props;
-    return (
-      <Card
-        className='spaced'
-        type='inner'
-        title={this.renderTitle()}
-        extra={this.renderFork()}
-      >
-        {repo.description}
-        <Divider style={{marginBottom: 0}} />
-        <div style={{ marginTop: 10, float: 'right' }}>
-          <RepositoryIcon hint='language' iconType='code' text={repo.language} />
-          <RepositoryIcon hint='stars' iconType='star' text={repo.favoriteCount} />
-          <RepositoryIcon hint='watchers' iconType='notification' text={repo.watcherCount} />
-          <RepositoryIcon hint='forks' iconType='fork' text={repo.forkCount} />
-          {repo.license
-            && <RepositoryIcon hint='license' iconType='book' text={repo.license} />
-          }
-          <RepositoryIcon
-            hide={repo.openIssueCount === 0}
-            hint='open issues'
-            iconType='exclamation-circle'
-            link={`${repo.htmlUrl}/issues`}
-            text={repo.openIssueCount}
-          />
+    if (repo.type === 'repository' || repo.type === 'gist') {
+      return (
+        <Card
+          className='spaced'
+          type='inner'
+          title={this.renderTitle()}
+          extra={this.renderFork()}
+        >
+          {repo.description}
+          <Divider style={{marginBottom: 0}} />
+          <div style={{ marginTop: 10, float: 'right' }}>
+            <ResourceIcon hint='language' iconType='code' text={repo.language} />
+            <ResourceIcon hint='stars' iconType='star' text={repo.favoriteCount} />
+            <ResourceIcon hint='watchers' iconType='notification' text={repo.watcherCount} />
+            <ResourceIcon hint='forks' iconType='fork' text={repo.forkCount} />
+            {repo.license && repo.license.name
+              && <ResourceIcon hint='license' iconType='book' text={repo.license.name} />
+            }
+            <ResourceIcon
+              hide={repo.type === 'gist' || repo.openIssueCount === 0}
+              hint='open issues'
+              iconType='exclamation-circle'
+              link={`${repo.htmlUrl}/issues`}
+              text={repo.openIssueCount}
+            />
+  
+            <ResourceIcon
+              hide={repo.topics.length === 0}
+              hint={repo.topics.join(', ')}
+              iconType='tags'
+            />
+  
+          </div>
+        </Card>
+      );
+    } else {
+      return (
+        <Card
+          className='spaced'
+          type='inner'
+          title={this.renderTitle()}
+          extra={this.renderFork()}
+        >
+          {repo.description}
+          <Divider style={{marginBottom: 0}} />
+          <div style={{ marginTop: 10, float: 'right' }}>
+  
+            <ResourceIcon
+              hide={repo.topics.length === 0}
+              hint={repo.topics.join(', ')}
+              iconType='tags'
+            />
+  
+          </div>
+        </Card>
+      );
+    }
 
-          <RepositoryIcon
-            hide={repo.topics.length === 0}
-            hint={repo.topics.join(', ')}
-            iconType='tags'
-          />
-
-        </div>
-      </Card>
-    );
   }
 
   private renderTitle() {
@@ -58,7 +81,7 @@ export class RepositoryItem extends React.Component<RepositoryItemProps, any> {
   }
 
   private renderFork() {
-    if (this.props.repo.fork) {
+    if (this.props.repo.type === 'repository' && this.props.repo.isFork) {
       return (
         <div><i>forked from <a href={this.props.repo.parent.htmlUrl}>{this.props.repo.parent.fullName}</a></i></div>
       );
