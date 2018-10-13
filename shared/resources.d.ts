@@ -8,7 +8,7 @@ type Resource = BaseRepo | WebsiteDataEntry;
 
 interface BaseDataEntry {
   name: string;
-  url: string | string[]; // website related to repo/project => http://open-force.org
+  url: string; // website related to repo/project => http://open-force.org
   owner?: User;
   description?: string;
   organization?: Organization; // information about the colllection that the repo belongs to
