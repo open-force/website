@@ -1,5 +1,5 @@
+import { PageHeader, Spinner } from '@salesforce/design-system-react';
 import { RepositoryList } from '@src/components';
-import { Card, Spin } from 'antd';
 import * as React from 'react';
 import { hot } from 'react-hot-loader';
 
@@ -16,7 +16,7 @@ class App extends React.Component<{}, AppState> {
     };
   }
 
-  public async componentDidMount(){
+  public async componentDidMount() {
     const response = await fetch('/api/repos');
     const repositories = await response.json();
     this.setState({ repositories });
@@ -24,12 +24,12 @@ class App extends React.Component<{}, AppState> {
 
   public render() {
     return (
-      <Card>
-        <h1>Open Force</h1>
-        <Card title={<h2>Repositories</h2>}>
-          {this.renderRepositories()}
-        </Card>
-      </Card>
+      <div>
+        <PageHeader
+          title='Open Force'
+        />
+        {this.renderRepositories()}
+      </div>
     );
   }
 
@@ -37,7 +37,13 @@ class App extends React.Component<{}, AppState> {
     if (this.state.repositories) {
       return <RepositoryList repositories={this.state.repositories} />;
     }
-    return <Spin spinning={true} />;
+    return (
+      <Spinner
+        size='small'
+        variant='base'
+        assistiveText={{ label: 'Small spinner' }}
+			/>
+    );
   }
 }
 

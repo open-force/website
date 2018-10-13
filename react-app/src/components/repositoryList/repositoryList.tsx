@@ -50,7 +50,7 @@ export class RepositoryList extends React.Component<RepositoryListProps, Reposit
     const dataSource = this.getDataSource();
 
     return (
-      <div>
+      <div className='slds-grid slds-grid_vertical'>
         <Row type='flex' justify='space-between'>
           <Col span={6}>
             <Input.Search
@@ -84,11 +84,12 @@ export class RepositoryList extends React.Component<RepositoryListProps, Reposit
             </Select>
           </Col>
         </Row>
-
-        <List
-          dataSource={dataSource}
-          renderItem={this.renderItem}
-        />
+        <div style={{ padding: 10 }}>
+          <List
+            dataSource={dataSource}
+            renderItem={this.renderItem}
+          />
+        </div>
       </div>
     );
   }
