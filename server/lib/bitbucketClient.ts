@@ -1,7 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { BitbucketRepository } from '../../shared/bitbucket';
-import { Repository, Owner } from '../../shared/resource';
-
+import { URL } from 'url';
 
 interface BitbucketBasicAuth {
   username: string;
@@ -25,29 +23,75 @@ export class Bitbucket {
     });
   }
 
-  public async getRepo(user: string, name: string, repo: RepositoryDataEntry): Promise<Repository> {
-    const response = await this.client.get<BitbucketRepository>(`/repositories/${user}/${name}`);
-    let data = response.data;
-    let r = new Repository();
-    r.name = data.name;
-    r.fullName = data.full_name;
-    r.owner = new Owner(data.owner.username, data.owner.links.html.href, data.owner.links.avatar.href);
-    r.description = data.description;
-    r.url = data.links.self.href;
-    r.htmlUrl = data.links.html.href;
-    r.license = repo.license || null; // bitbucket does not allow you to specify a license
-    r.platform = 'bitbucket';
-    // r.organization = bitbucket doesn't have the same organziation concept that github has
-    // r.favoriteCount = no concept of stars or bookmarks, just watchers
-    // r.watcherCount = need a separate api call for this
-    // r.forkCount = need a separate api call for this
-    r.createdDate = data.created_on;
-    r.language = data.language;
-    // r.openIssueCount = need a separate api call for this
-    r.topics = ['bitbucket']; // need a separate api call for this
-    // r.parent = no concept of a parent
-    // r.fork = need a separate api call for this
-    return r;
+  public async getRepo(dataEntry: ResourceDataEntry): Promise<Resource> {
+    // https://bitbucket.org/mikesimps/mike-public-test
+    // https://api.bitbucket.org/2.0/repositories/mikesimps/mike-public-test
+    let u: URL = new URL(dataEntry.url);
+    const response = await this.client.get<BitbucketRepo>(`/repositories${u.pathname}`);
+    return this.mapBitbucketToResource(response.data, dataEntry);
+  }
+
+  private mapBitbucketToResource(bitbucket: BitbucketRepo, dataEntry: ResourceDataEntry): Resource {
+    let {
+      name,
+      owner: { username: username ,
+                links: {
+                  html: { href: website },
+                  avatar: { href: avatarUrl }
+                } 
+      },
+      description,
+      organization = null,
+      id,
+      full_name: fullName,
+      links: {
+        html: { href: htmlUrl , href: url }
+      },
+      gitUrl = null,
+      language = null,
+      license = null,
+      isFork = false,
+      forkCount = null,
+      favoriteCount = null,
+      watcherCount = null,
+      openIssueCount = null,
+      topics = null,
+      created_on: createdDate,
+      parent = null
+    } = bitbucket;
+
+    name = dataEntry.name || name;
+    language = dataEntry.language || language;
+    license = dataEntry.license || license;
+    organization = dataEntry.organization || organization;
+    description = dataEntry.description || description;
+
+    topics ? topics.push('bitbucket') : topics = ['bitbucket'] ;
+    gitUrl = bitbucket.links.self + '.git';
+
+    return {
+      type: 'repository',
+      platform: 'bitbucket',
+      name,
+      owner: { username },
+      description,
+      organization,
+      id,
+      fullName,
+      url,
+      htmlUrl,
+      gitUrl,
+      language,
+      license,
+      isFork,
+      forkCount,
+      favoriteCount,
+      watcherCount,
+      openIssueCount,
+      topics,
+      createdDate,
+      parent 
+    }
   }
 
   private getAuthValue(auth: BitbucketAuth){

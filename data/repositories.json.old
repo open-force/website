@@ -1,0 +1,74 @@
+[
+  {
+    "user": "open-force",
+    "repositories": [
+      "jsonparse",
+      "Httpex",
+      "grid"
+    ]
+  },
+  {
+    "user": "chuckjonas",
+    "repositories": [
+      "APEX-JSONReservedNameSerializer",
+      "sfdx-org-launcher",
+      "bad-ass-salesforce-stack",
+      "ts-force"
+    ]
+  },
+  {
+    "user": "salesforce",
+    "repositories": [
+      "design-system-react"
+    ]
+  },
+  {
+    "user": "financialforcedev",
+    "repositories": [
+      "fflib-apex-common",
+      "apex-mdapi",
+      "fflib-apex-mocks"
+    ]
+  },
+  {
+    "user": "blueprinthealth",
+    "repositories": [
+      "sirono-common"
+    ]
+  },
+  {
+    "user": "madmax983",
+    "repositories": [
+      "lightning-redux"
+    ]
+  },
+  {
+    "user": "mikesimps",
+    "source": "github",
+    "repositories": [
+      "sfdx-collate"
+    ]
+  },
+  {
+    "user": "pozil",
+    "repositories": [
+      "lightning-singleton"
+    ]
+  },
+  {
+    "user": "mikesimps",
+    "source": "bitbucket",
+    "repositories": [
+      "mike-public-test"
+    ]
+  },
+  {
+    "user": "mikesimps",
+    "source": "gitlab",
+    "url" : "https://gitlab.com",
+    "repositories": [
+      "8833630"
+    ]
+  }
+
+]

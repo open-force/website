@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
-import { Repository, Owner, Organization } from '../../shared/resource';
+import { URL } from 'url';
+import { SSL_OP_ALLOW_UNSAFE_LEGACY_RENEGOTIATION } from 'constants';
 
 interface GithubBasicAuth {
   username: string;
@@ -25,30 +26,115 @@ export class Github {
     });
   }
 
-  public async getRepo(user, name): Promise<Repository> {
-    const response = await this.client.get<GithubRepository>(`/repos/${user}/${name}`);
-    let data = response.data;
-    let r = new Repository();
-    r.name = data.name;
-    r.fullName = data.full_name;
-    r.owner = new Owner(data.owner.login, data.owner.html_url, data.owner.avatar_url);
-    r.description = data.description;
-    r.url = data.url;
-    r.htmlUrl = data.html_url;
-    r.license = data.license ? data.license.name : null;
-    r.platform = 'github';
-    r.organization = data.organization ? new Organization(data.organization.login, data.organization.html_url) : null;
-    r.favoriteCount = data.stargazers_count;
-    r.watcherCount = data.watchers_count;
-    r.forkCount = data.forks_count;
-    r.createdDate = data.created_at;
-    r.language = data.language;
-    r.openIssueCount = data.open_issues_count;
-    r.topics = data.topics;
-    r.topics.push('github');
-    r.parent = data.parent ? await this.getRepo(data.parent.owner.login, data.parent.name) : null;
-    r.fork = data.fork;
-    return r;
+  public async getRepo(dataEntry: ResourceDataEntry): Promise<Resource> {
+    // https://github.com/open-force/website
+    // https://api.github.com/repos/open-force/website
+    let u: URL = new URL(dataEntry.url);
+    const response = await this.client.get<GithubRepo>(`/repos${u.pathname}`);
+    return this.mapGithubToResource(response.data, dataEntry);
+  }
+
+  public async getGist(dataEntry: ResourceDataEntry): Promise<Resource> {
+    // https://gist.github.com/mikesimps/fd2de065248c878f1790a663fbf16e2e
+    // https://api.github.com/gists/fd2de065248c878f1790a663fbf16e2e
+    let u: URL = new URL(dataEntry.url);
+    const response = await this.client.get<GistRepo>(`/gists/${u.pathname.split('/')[2]}`);
+    return this.mapGistToResource(response.data, dataEntry);
+  }
+
+  private mapGithubToResource(github: GithubRepo, dataEntry: ResourceDataEntry ): Resource {
+    let { 
+      name,
+      owner: { login: username , html_url: website, avatar_url: avatarUrl },
+      description,
+      organization = null,
+      id,
+      full_name: fullName,
+      homepage: url,
+      html_url: htmlUrl,
+      git_url: gitUrl,
+      language: language = null,
+      license: license = null,
+      fork: isFork,
+      forks_count: forkCount = 0,
+      stargazers_count: favoriteCount = 0,
+      watchers_count: watcherCount = 0,
+      open_issues_count: openIssueCount = 0,
+      topics: topics,
+      created_at: createdDate,
+      parent: parent = null
+    } = github;
+
+
+    name = dataEntry.name || name;
+    language = dataEntry.language || language;
+    license = dataEntry.license || license;
+    organization = dataEntry.organization || organization;
+    description = dataEntry.description || description;
+    topics ? topics.push('github') : topics = ['github'] ;
+
+
+    return {
+      type: 'repository',
+      platform: 'github',
+      name,
+      owner: { username, website, avatarUrl},
+      description,
+      organization,
+      id,
+      fullName,
+      url,
+      htmlUrl,
+      gitUrl,
+      language,
+      license,
+      isFork,
+      forkCount,
+      favoriteCount,
+      watcherCount,
+      openIssueCount,
+      topics,
+      createdDate,
+      parent
+    }
+  }
+
+  private mapGistToResource(gist: GistRepo, dataEntry: ResourceDataEntry ): Resource {
+    let { 
+      name,
+      organization,
+      url,
+      language,
+      license,
+      topics,
+      id: id,
+      owner: { login: username , html_url: website, avatar_url: avatarUrl },
+      description: description,
+      html_url: htmlUrl,
+      git_pull_url: gitUrl,
+      created_at: createdDate
+    } = gist;
+
+    url = url || htmlUrl; 
+    name = dataEntry.name ? dataEntry.name : name;
+    topics ? topics.push('github') : topics = ['github'] ;
+    
+    return {
+      type: 'gist',
+      platform: 'github',
+      name,
+      organization,
+      url,
+      language,
+      license,
+      topics,
+      id,
+      owner: { username, website, avatarUrl},
+      description,
+      htmlUrl,
+      gitUrl,
+      createdDate
+    }
   }
 
   private getAuthValue(auth: GithubAuth){

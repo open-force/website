@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import { Repository, Owner, Organization } from '../../shared/resource';
+import { URL } from 'url';
 
 interface GitlabBasicAuth {
   username: string;
@@ -11,46 +11,85 @@ type GitlabAuth = GitlabBasicAuth | string;
 export class Gitlab {
   private client: AxiosInstance;
 
-  public async getRepo(id: number, baseUrl: string): Promise<Repository> {
-
+  public async getRepo(dataEntry: ResourceDataEntry): Promise<Resource> {
+    // https://gitlab.com/mikesimps/mike-public-test
+    // https://gitlab.com/api/v4/projects/mikesimps%2Fmike-public-test
+    let u: URL = new URL(dataEntry.url);
+    const encPath = '/'+encodeURIComponent(u.pathname.substring(1));
+    console.log('https://' + u.hostname + '/api/v4/projects');
     this.client = axios.create({
-      baseURL: baseUrl + '/api/v4/' || 'https://gitlab.com/api/v4/'
+      baseURL: 'https://' + u.hostname + '/api/v4/projects'
     });
-
-    const response = await this.client.get<GitlabProject>(`/projects/${id}?statistics=true`);
-    let data = response.data;
-    console.log(data);
-    let r = new Repository();
-    r.name = data.name;
-    r.fullName = data.path_with_namespace;
-    r.owner = new Owner(data.namespace.path,  baseUrl + data.namespace.path, null); //need another call to get avatar
-    r.description = data.description;
-    r.url = data.http_url_to_repo;
-    r.htmlUrl = data.web_url;
-    // r.license = data.license ? data.license.name : null;
-    r.platform = 'gitlab';
-    r.organization = data.namespace ? new Organization(data.namespace.name, null) : null; // need another call to get htmlUrl
-    r.favoriteCount = data.star_count;
-    // r.watcherCount = need another api call to get this info
-    r.forkCount = data.forks_count
-    r.createdDate = data.created_at;
-    // r.language = need another api call to get this
-    r.openIssueCount = data.open_issues_count;
-    r.topics = data.tag_list;
-    r.topics.push('gitlab');
-    r.parent = data.forked_from_project ? await this.getRepo(data.forked_from_project.id, data.forked_from_project._links.self) : null;
-    r.fork = data.forked_from_project ? true : false;
-    return r;
+    const response = await this.client.get<GitlabProj>(encPath);
+    console.log(response);
+    return this.mapGitlabToResource(response.data, dataEntry);
   }
 
-  private getAuthValue(auth: GitlabAuth){
-    if (typeof auth === 'string') {
-      return `token ${auth}`;
-    } else {
-      let b64 = new Buffer(auth.username + ':' + auth.password).toString('base64');
-      return `basic ${b64}`;
+  private mapGitlabToResource(gitlab: GitlabProj, dataEntry: ResourceDataEntry): Resource {
+    let {
+      name,
+      description,
+      organization,
+      id,
+      namespace: { name: username },
+      path_with_namespace: fullName,
+      web_url: url,
+      web_url: htmlUrl,
+      http_url_to_repo: gitUrl,
+      language = null,
+      license = null,
+      isFork = false,
+      forks_count: forkCount = null,
+      star_count: favoriteCount = null,
+      watcherCount = null,
+      open_issues_count: openIssueCount = null,
+      tag_list: topics,
+      created_at: createdDate,
+      forked_from_project: parent = null
+    } = gitlab;
+
+    name = dataEntry.name || name;
+    language = dataEntry.language || language;
+    license = dataEntry.license || license;
+    organization = dataEntry.organization || organization;
+    description = dataEntry.description || description;
+    
+    username = gitlab.namespace.name;
+    isFork = forkCount > 0 ? true : false;
+
+    return {
+      type: 'repository',
+      platform: 'gitlab',
+      name,
+      owner: { username },
+      description,
+      organization,
+      id,
+      fullName,
+      url,
+      htmlUrl,
+      gitUrl,
+      language,
+      license,
+      isFork,
+      forkCount,
+      favoriteCount,
+      watcherCount,
+      openIssueCount,
+      topics,
+      createdDate,
+      parent
     }
   }
+
+  // private getAuthValue(auth: GitlabAuth){
+  //   if (typeof auth === 'string') {
+  //     return `token ${auth}`;
+  //   } else {
+  //     let b64 = new Buffer(auth.username + ':' + auth.password).toString('base64');
+  //     return `basic ${b64}`;
+  //   }
+  // }
 
 }
 

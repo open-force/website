@@ -5,7 +5,6 @@ import * as cache from 'memory-cache';
 import { Github } from './lib/githubClient';
 import { Bitbucket } from './lib/bitbucketClient';
 import { Gitlab } from './lib/gitlabClient';
-import { Repository } from '../shared/resource';
 
 require('dotenv').config();
 
@@ -21,7 +20,7 @@ const bitbucket = new Bitbucket({
 
 const gitlab = new Gitlab();
 
-const repoData: RepositoryDataEntry[] = JSON.parse(
+const resourceData: ResourceDataEntry[] = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, '../data/repositories.json')).toString()
 );
 
@@ -32,7 +31,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.static(path.resolve(__dirname, '../react-app/dist')));
 
 app.get('/api/repos', async function (request, response) {
-  response.send(await getRepoData());
+  response.send(await getResourceData());
 });
 
 // All remaining requests return the React app, so it can handle routing.
@@ -46,7 +45,7 @@ app.listen(PORT, function () {
 
 const CACHE_KEY = 'repos'
 const CACHE_TIMEOUT = 60*5*1000;
-async function getRepoData(){
+async function getResourceData(){
 
   //check cache
   if(cache.get(CACHE_KEY)){
@@ -55,31 +54,64 @@ async function getRepoData(){
   console.log('no cache found!')
 
   //pull data
-  let data: Repository[] = [];
-  for (let item of repoData) {
-    for (let repo of item.repositories) {
-      try{
-        let repository: Repository;
-        switch (item.source) {
+  let data: Resource[] = [];
+  for (let item of resourceData) {
+    try{
+      let resource;
+      if (item.type === 'repository') {
+        switch (item.platform) {
           case 'bitbucket': {
-            repository = await bitbucket.getRepo(item.user, repo);
+            resource = await bitbucket.getRepo(item);
             break;
           }
           case 'gitlab': {
-            repository = await gitlab.getRepo(Number(repo), item.url);
+            resource = await gitlab.getRepo(item);
+            console.log(resource);
             break;
           }
           default: {
-            repository = await github.getRepo(item.user, repo);
+            resource = await github.getRepo(item);
           }
         }
-        data.push(repository);
-      }catch(e){
-        console.log(e);
+      } else if (item.type === 'gist') {
+        resource = await github.getGist(item);
+      } else if (item.type === 'website') {
+        resource = mapWebsiteToResource(item);
       }
+      if (resource !== undefined) { data.push(resource); }
+    } catch(e){
+      console.log(e);
     }
   }
 
   cache.put(CACHE_KEY, data, CACHE_TIMEOUT);
   return data;
+}
+
+function mapWebsiteToResource(website: WebsiteDataEntry): Resource {
+  let {
+    type,
+    name,
+    url,
+    owner = {},
+    description,
+    organization = {},
+    topics,
+    favoriteCount = 0,
+    watcherCount = 0
+  } = website;
+  
+   topics ? topics.push(type) : topics = [type];
+
+  return {
+    type,
+    name,
+    url,
+    owner,
+    description,
+    organization,
+    topics,
+    favoriteCount,
+    watcherCount
+  }
 }

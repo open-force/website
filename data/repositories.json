@@ -1,74 +1,77 @@
 [
   {
-    "user": "open-force",
-    "repositories": [
-      "jsonparse",
-      "Httpex",
-      "grid"
-    ]
+    "type": "repository",
+    "platform": "github",
+    "url": "https://github.com/open-force/jsonparse"
   },
   {
-    "user": "chuckjonas",
-    "repositories": [
-      "APEX-JSONReservedNameSerializer",
-      "sfdx-org-launcher",
-      "bad-ass-salesforce-stack",
-      "ts-force"
-    ]
+    "type": "repository",
+    "platform": "github",
+    "url": "https://github.com/open-force/Httpex"
   },
   {
-    "user": "salesforce",
-    "repositories": [
-      "design-system-react"
-    ]
+    "type": "repository",
+    "platform": "github",
+    "url": "https://github.com/open-force/grid"
   },
   {
-    "user": "financialforcedev",
-    "repositories": [
-      "fflib-apex-common",
-      "apex-mdapi",
-      "fflib-apex-mocks"
-    ]
+    "type": "repository",
+    "platform": "github",
+    "url": "https://github.com/chuckjonas/APEX-JSONReservedNameSerializer"
   },
   {
-    "user": "blueprinthealth",
-    "repositories": [
-      "sirono-common"
-    ]
+    "type": "repository",
+    "platform": "github",
+    "url": "https://github.com/chuckjonas/sfdx-org-launcher"
   },
   {
-    "user": "madmax983",
-    "repositories": [
-      "lightning-redux"
-    ]
+    "type": "repository",
+    "platform": "github",
+    "url": "https://github.com/chuckjonas/bad-ass-salesforce-stack"
   },
   {
-    "user": "mikesimps",
-    "source": "github",
-    "repositories": [
-      "sfdx-collate"
-    ]
+    "type": "repository",
+    "platform": "github",
+    "url": "https://github.com/chuckjonas/ts-force"
   },
   {
-    "user": "pozil",
-    "repositories": [
-      "lightning-singleton"
-    ]
+    "type": "repository",
+    "platform": "github",
+    "url": "https://github.com/salesforce/design-system-react"
   },
   {
-    "user": "mikesimps",
-    "source": "bitbucket",
-    "repositories": [
-      "mike-public-test"
-    ]
+    "type": "repository",
+    "platform": "github",
+    "url": "https://github.com/financialforcedev/fflib-apex-common"
   },
   {
-    "user": "mikesimps",
-    "source": "gitlab",
-    "url" : "https://gitlab.com",
-    "repositories": [
-      "8833630"
-    ]
+    "type": "repository",
+    "platform": "github",
+    "url": "https://github.com/financialforcedev/apex-mdapi"
+  },
+  {
+    "type": "repository",
+    "platform": "github",
+    "url": "https://github.com/financialforcedev/fflib-apex-mocks"
+  },
+  {
+    "type": "repository",
+    "platform": "github",
+    "url": "https://github.com/blueprinthealth/sirono-common"
+  },
+  {
+    "type": "repository",
+    "platform": "github",
+    "url": "https://github.com/madmax983/lightning-redux"
+  },
+  {
+    "type": "repository",
+    "platform": "github",
+    "url": "https://github.com/pozil/lightning-singleton"
+  },
+  {
+    "type": "repository",
+    "url": "https://github.com/mikesimps/sfdx-collate",
+    "platform": "github"
   }
-
 ]
