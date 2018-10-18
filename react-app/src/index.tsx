@@ -3,8 +3,8 @@ import * as ReactDOM from 'react-dom';
 
 import App from './app';
 
-// add custom stylesheet
+// add react styles
 // tslint:disable-next-line:no-var-requires
-require('@src/styles/styles.less');
+require('@salesforce-ux/design-system/assets/styles/salesforce-lightning-design-system.min.css');
 
 ReactDOM.render(<App />, document.getElementById('root') as HTMLElement);

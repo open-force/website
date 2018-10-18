@@ -1,5 +1,6 @@
+import { Card } from '@salesforce/design-system-react';
 import { RepositoryIcon } from '@src/components/repositoryItem/repositoryIcon';
-import { Avatar, Badge, Card, Divider, Icon, Popover, Tooltip } from 'antd';
+import { Avatar, Divider, Tooltip } from 'antd';
 import * as React from 'react';
 
 export interface RepositoryItemProps {
@@ -11,11 +12,10 @@ export class RepositoryItem extends React.Component<RepositoryItemProps, any> {
     const {repo} = this.props;
     return (
       <Card
-        className='spaced'
-        type='inner'
-        title={this.renderTitle()}
-        extra={this.renderFork()}
+        className='slds-grid slds-grid_vertical'
+        heading={this.renderTitle()}
       >
+        {this.renderFork()}
         {repo.description}
         <Divider style={{marginBottom: 0}} />
         <div style={{ marginTop: 10, float: 'right' }}>
