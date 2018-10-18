@@ -1,0 +1,28 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "RepositoryDataEntry": {
+            "properties": {
+                "repositories": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "user": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "repositories",
+                "user"
+            ],
+            "type": "object"
+        }
+    },
+    "items": {
+        "$ref": "#/definitions/RepositoryDataEntry"
+    },
+    "type": "array"
+}
+
