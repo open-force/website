@@ -25,7 +25,7 @@ function getAuthJWT() {
   let userName = process.env.SFDC_USER;
 
   // retrieve encrypted key
-  var encryptedKey = fs.readFileSync(path.resolve(__dirname, '../../build/server.key.enc'), 'utf8'); //needs to be encrypted using `openssl enc -aes-256-cbc`
+  var encryptedKey = fs.readFileSync(path.resolve(__dirname, '../../server.key.enc'), 'utf8'); //needs to be encrypted using `openssl enc -aes-256-cbc`
 
   //decrypt
   let decipher = crypto.createDecipheriv('aes-256-cbc', aesKey, ivKey);
@@ -36,7 +36,6 @@ function getAuthJWT() {
   return getJWTToken(
     {
       clientId,
-      // audience: 'https://test.salesforce.com',
       privateKey,
       userName
     }
