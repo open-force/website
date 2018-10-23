@@ -9,8 +9,7 @@
     "start": "node ./build/index.js",
     "dev-client": "cd react-app && npm start",
     "dev-server": "nodemon --exec ./node_modules/.bin/ts-node -- ./server/index.ts",
-    "new-org": "cd website-org && ./build",
-    "generate-ts-force": "ORGINFO=$(cd ./website-org && sfdx force:org:display --json) && ts-force-gen -j ts-force-config.json -a $(echo $ORGINFO | ./node_modules/.bin/json result.accessToken) -i $(echo $ORGINFO | ./node_modules/.bin/json result.instanceUrl)",
+    "generate-ts-force": "ORGINFO=$(cd ../org && sfdx force:org:display --json) && ts-force-gen -j ts-force-config.json -a $(echo $ORGINFO | ./node_modules/.bin/json result.accessToken) -i $(echo $ORGINFO | ./node_modules/.bin/json result.instanceUrl)",
     "test": "echo 'no tests setup'",
     "heroku-postbuild": "tsc & cd react-app/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },

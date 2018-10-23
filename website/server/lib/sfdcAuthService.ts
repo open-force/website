@@ -6,9 +6,9 @@ import { getJWTToken } from 'salesforce-jwt-promise';
 
 export default async function () {
   let authInfo: { accessToken: string, instanceUrl?: string }
-  if (process.env.NODE_ENV !== 'development') {
+  if (process.env.NODE_ENV === 'development') {
     //use website-org env default dx user
-    let orgInfo = JSON.parse(require('child_process').execSync("sfdx force:org:display --json", { cwd: 'website-org' }).toString('utf8'));
+    let orgInfo = JSON.parse(require('child_process').execSync("sfdx force:org:display --json", { cwd: '../org' }).toString('utf8'));
     let { accessToken, instanceUrl } = orgInfo.result;
     authInfo = { accessToken, instanceUrl };
   } else {
