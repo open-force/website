@@ -1,0 +1,7 @@
+{
+  "auth": {},
+  "sObjects": [
+    "Resource__c"
+  ],
+  "outPath": "./server/generated/sobs.ts"
+}
