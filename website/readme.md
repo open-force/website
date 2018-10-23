@@ -38,12 +38,12 @@ GITHUB_PASS=
 
 - Uses `nodemon` to automatically update the server on changes.
 - Uses `webpack-dev-server` to hot reload client changes.
-- When `NODE_ENV`is not production, the server will connect using default user found in `./website-org/.sfdx/sfdx-config.json`
+- When `NODE_ENV`is not production, the server will connect using default user found in `../org/.sfdx/sfdx-config.json`
 
 ## Deploy to heroku
 
 1. `heroku create`
-1. `git push heroku master`
-1. use the `heroku` cli or user interface to setup "config vars" for same `.env` properties above
+2. `git push heroku master`
+3. use the `heroku` cli or user interface to setup "config vars" for same `.env` properties above
 
 Note: Uses the `heroku-postbuild` script to build the react app upon deployment.  This results in a slightly slower deploy time.
