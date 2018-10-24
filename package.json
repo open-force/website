@@ -19,8 +19,5 @@
   "bugs": {
     "url": "https://github.com/open-force/website/issues"
   },
-  "devDependencies": {
-    "typescript": "^2.8.1"
-  },
   "homepage": "https://github.com/open-force/website#readme"
 }
