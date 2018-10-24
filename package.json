@@ -15,7 +15,7 @@
     "url": "git+https://github.com/open-force/website.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/open-force/website/issues"
   },
