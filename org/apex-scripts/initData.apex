@@ -1,0 +1,1 @@
+new AutoIndex().execute(null);

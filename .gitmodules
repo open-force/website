@@ -1,0 +1,3 @@
+[submodule "org/website-org/jsonparse"]
+	path = org/website-org/jsonparse
+	url = https://github.com/open-force/jsonparse.git

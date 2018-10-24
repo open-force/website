@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Canonical_URL__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <description>The official URL for this resource.</description>
+    <externalId>true</externalId>
+    <inlineHelpText>The official URL for this resource.</inlineHelpText>
+    <label>Canonical URL</label>
+    <length>255</length>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>

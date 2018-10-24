@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <applicationVisibilities>
+        <application>Open_Force</application>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <description>Permissions needed by an administrator managing the data that drives the open-force.org website.</description>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Open-Force Admin</label>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Resource__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <tabSettings>
+        <tab>Resource__c</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
+</PermissionSet>
