@@ -10,10 +10,10 @@ const CACHE_TIMEOUT = 60 * 5 * 1000;
 export class ResourceService {
   private github: Github;
   constructor() {
-    this.github = new Github({
+    this.github = process.env.GITHUB_USER ? new Github({
       username: process.env.GITHUB_USER,
       password: process.env.GITHUB_PASS
-    });
+    }) : new Github();
   }
 
   public async getRepoData() {
