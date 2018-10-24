@@ -6,8 +6,9 @@ import { ResourceService } from './lib/resourceService';
 require('dotenv').config({ encoding: 'utf8' });
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-sfdcAuth();
-start();
+sfdcAuth().then(()=>{
+    start();
+});
 
 async function start() {
 
