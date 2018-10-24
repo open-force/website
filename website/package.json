@@ -7,6 +7,7 @@
   },
   "scripts": {
     "start": "node ./build/index.js",
+    "postinstall": "cd react-app && npm install",
     "dev-client": "cd react-app && npm start",
     "dev-server": "nodemon --exec ./node_modules/.bin/ts-node -- ./server/index.ts",
     "generate-ts-force": "ORGINFO=$(cd ../org && sfdx force:org:display --json) && ts-force-gen -j ts-force-config.json -a $(echo $ORGINFO | ./node_modules/.bin/json result.accessToken) -i $(echo $ORGINFO | ./node_modules/.bin/json result.instanceUrl)",
