@@ -2,7 +2,9 @@
   "name": "open-force",
   "version": "1.0.0",
   "description": "This repository contains all the code which drives the open-force website.  It is split into two projects:",
-  "main": "index.js",
+  "engines": {
+    "node": "8.9.x"
+  },
   "scripts": {
     "install": "cd website && npm install",
     "heroku-postbuild": "cd website && tsc & cd website/react-app/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
