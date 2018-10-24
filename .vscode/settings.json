@@ -1,0 +1,4 @@
+{
+    "git.detectSubmodules": false,
+    "git.ignoredRepositories": ["jsonparse"]
+}
