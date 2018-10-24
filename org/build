@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Create the scratch org
+echo "sfdx force:org:create -s -f config/website-org-scratch-def.json -a website-org -s"
+sfdx force:org:create -s -f config/website-org-scratch-def.json -a website-org -s
+
+# Push the project into the org
+echo "sfdx force:source:push"
+sfdx force:source:push
+
+# Assign yourself a permset
+echo "sfdx force:user:permset:assign -n Open_Force_Admin"
+sfdx force:user:permset:assign -n Open_Force_Admin
+
+# Create a User for the website
+echo "force:user:create --setalias website-api-user permsets=Open_Force_Website generatePassword=true profileName=\"API Only\" LastName=\"Heroku Website\""
+sfdx force:user:create --setalias website-api-user permsets=Open_Force_Website generatePassword=true profileName="API Only" LastName="Heroku Website"
+
+# populate data
+echo "force:apex:execute -f './apex-scripts/initData.apex'"
+sfdx force:apex:execute -f './apex-scripts/initData.apex'
+
+# Login and open
+echo "sfdx force:org:open"
+sfdx force:org:open
