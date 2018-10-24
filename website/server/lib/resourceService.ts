@@ -1,10 +1,10 @@
 import { Resource } from '../generated/sobs';
 import * as cache from 'memory-cache'
 import { generateSelect } from 'ts-force';
-import { Github } from '../lib/githubClient';
+import { Github } from './githubClient';
 import sfdcAuth from './sfdcAuthService'
 
-const CACHE_KEY = 'repos'
+const CACHE_KEY = 'repos';
 const CACHE_TIMEOUT = 60 * 5 * 1000;
 
 export class ResourceService {
