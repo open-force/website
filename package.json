@@ -1,0 +1,21 @@
+{
+  "name": "open-force",
+  "version": "1.0.0",
+  "description": "This repository contains all the code which drives the open-force website.  It is split into two projects:",
+  "main": "index.js",
+  "scripts": {
+    "install": "cd website && npm install",
+    "heroku-postbuild": "cd website && tsc & cd website/react-app/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "start": "cd website && node ./build/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/open-force/website.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/open-force/website/issues"
+  },
+  "homepage": "https://github.com/open-force/website#readme"
+}
