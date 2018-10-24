@@ -6,7 +6,7 @@
     "node": "8.9.x"
   },
   "scripts": {
-    "postinstall": "cd website && npm install",
+    "postinstall": "npm install -g typescript && cd website && npm install",
     "heroku-postbuild": "tsc --p ./website/tsconfig.json && cd website/react-app/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "start": "cd website && node ./build/index.js"
   },
