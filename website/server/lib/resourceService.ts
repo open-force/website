@@ -1,19 +1,19 @@
 import { Resource } from '../generated/sobs';
 import * as cache from 'memory-cache'
 import { generateSelect } from 'ts-force';
-import { Github } from '../lib/githubClient';
+import { Github } from './githubClient';
 import sfdcAuth from './sfdcAuthService'
 
-const CACHE_KEY = 'repos'
+const CACHE_KEY = 'repos';
 const CACHE_TIMEOUT = 60 * 5 * 1000;
 
 export class ResourceService {
   private github: Github;
   constructor() {
-    this.github = new Github({
+    this.github = process.env.GITHUB_USER ? new Github({
       username: process.env.GITHUB_USER,
       password: process.env.GITHUB_PASS
-    });
+    }) : new Github();
   }
 
   public async getRepoData() {

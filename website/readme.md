@@ -13,9 +13,10 @@ Project has 2 package.json files, so you will need to run `npm install` twice.
 1. `git clone --recursive [URL]`: includes the website as a submodule
 2. `cd`
 3. `npm install`
-4. `npm run new-org`: Creates a scratch org and deploys code in `./website-org` submodule. If you already have an org you want to use, cd into `website-org` and run `sfdx force:config:set defaultusername={ORG}`.
-5. `cd react-app`
-6. `npm install`
+4. `cd react-app`
+5. `npm install`
+
+This project expects to get data about Resources from a Salesforce org. To set up your own DX scratch org to pull data from, [see the org readme](../org/README.md).
 
 ### .env
 
