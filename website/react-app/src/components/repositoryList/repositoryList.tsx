@@ -51,7 +51,7 @@ export class RepositoryList extends React.Component<RepositoryListProps, Reposit
 
     return (
       <div className='slds-grid slds-grid_vertical'>
-        <Row type='flex' justify='space-between' className="slds-m-horizontal_small">
+        <Row type='flex' justify='space-between' className='slds-m-horizontal_small'>
           <Col span={6}>
             Search: <Input.Search
               value={this.state.searchTerm}
@@ -100,7 +100,7 @@ export class RepositoryList extends React.Component<RepositoryListProps, Reposit
       const include =
         (
           repo.name.toLowerCase().includes(term)
-          || repo.description.includes(term)
+          || (repo.description && repo.description.includes(term))
           || repo.topics.filter((topic) => topic.includes(term)).length
         )
         &&
