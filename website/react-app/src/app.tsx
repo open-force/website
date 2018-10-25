@@ -31,12 +31,12 @@ class App extends React.Component<{}, AppState> {
           <div className="slds-m-around_large slds-text-heading_small">
               <p className="slds-m-vertical_medium">Welcome to open-force.org! This is a maker space for developers and others in the Salesforce.com ecosystem to share code with each other. Think of open-force as a workshop where people like you are hanging out, tinkering with things they are passionate about. Maybe you'd like to chip in on a project you find interesting, or maybe you'd like to bring your own project into the workshop?</p>
 
-              <p className="slds-m-vertical_medium">This website includes a searchable index of open source projects that exist in Salesforce-land. You can browse these projects with the tool below. Send an email to dev@open-force.org to have your project added to the index.</p>
+              <p className="slds-m-vertical_medium">This website includes a searchable index of open source projects that exist in Salesforce-land. You can browse these projects with the tool below. We're happy to list any Salesforce-related open source project; send an email to dev@open-force.org to have your project added to the index.</p>
 
               <p className="slds-m-vertical_medium">There are some companion resources to this website:</p>
 
               <ol style={{listStyleType: "circle"}} className="slds-m-horizontal_large">
-                  <li>You can get hosting for your project in our public GitHub at <a href="https://github.com/open-force">https://github.com/open-force</a>. To have a repository created, send an email to dev@open-force.org.</li>
+                  <li>if you'd like a place to host your project, we give out repositories in our public GitHub at <a href="https://github.com/open-force">https://github.com/open-force</a>. To have a repository created, send an email to dev@open-force.org.</li>
                   <li>We have a community of collaborators that hang out in a slack channel over on the GoodDaySir podcast slack. Sign up for the slack group at <a href="https://www.gooddaysirpodcast.com/community">https://www.gooddaysirpodcast.com/community</a>, and find us in the #open-force channel.</li>
               </ol>
 
