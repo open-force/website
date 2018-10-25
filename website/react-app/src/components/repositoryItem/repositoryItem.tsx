@@ -16,7 +16,7 @@ export class RepositoryItem extends React.Component<RepositoryItemProps, any> {
         heading={this.renderTitle()}
       >
         {this.renderFork()}
-        {repo.description}
+          <p className="slds-m-around_small">{repo.description}</p>
         <Divider style={{marginBottom: 0}} />
         <div style={{ marginTop: 10, float: 'right' }}>
           <RepositoryIcon hint='language' iconType='code' text={repo.language} />
@@ -59,7 +59,7 @@ export class RepositoryItem extends React.Component<RepositoryItemProps, any> {
   private renderFork() {
     if (this.props.repo.fork) {
       return (
-        <div><i>forked from <a href={this.props.repo.parent.html_url}>{this.props.repo.parent.full_name}</a></i></div>
+        <div className="slds-m-horizontal_xx-small"><i>forked from <a href={this.props.repo.parent.html_url}>{this.props.repo.parent.full_name}</a></i></div>
       );
     }
     return null;

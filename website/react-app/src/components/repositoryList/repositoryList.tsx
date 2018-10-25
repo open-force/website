@@ -51,9 +51,9 @@ export class RepositoryList extends React.Component<RepositoryListProps, Reposit
 
     return (
       <div className='slds-grid slds-grid_vertical'>
-        <Row type='flex' justify='space-between'>
+        <Row type='flex' justify='space-between' className="slds-m-horizontal_small">
           <Col span={6}>
-            <Input.Search
+            Search: <Input.Search
               value={this.state.searchTerm}
               onChange={(e) => this.setState({ searchTerm: e.target.value })}
               style={{ width: 300 }}
