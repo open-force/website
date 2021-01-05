@@ -22,7 +22,7 @@
     "@types/jsonwebtoken": "^7.2.8",
     "@types/node": "^10.1.2",
     "@types/prop-types": "^15.5.6",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "dotenv": "^6.1.0",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.3.0",
